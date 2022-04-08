@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+mysqlclient = "*"
+uvicorn = "*"
+fastapi = "*"
+python-jose = "*"
+python-multipart = "*"
+python-dotenv = "*"
+aiofiles = "*"
+pandas = "*"
+numpy = "*"
+matplotlib = "*"
+SQLAlchemy = "*"
+sqlmodel = "*"
+pyjwt = {extras = ["crypto"], version = "*"}
+passlib = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+autopep8 = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.10"
+
+[scripts]
+start = "uvicorn src.main:app --reload"
+test = "pytest"
