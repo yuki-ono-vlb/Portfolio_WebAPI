@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-mysqlclient = "*"
 uvicorn = "*"
 fastapi = "*"
 python-jose = "*"
@@ -18,6 +17,7 @@ SQLAlchemy = "*"
 sqlmodel = "*"
 pyjwt = {extras = ["crypto"], version = "*"}
 passlib = "*"
+bcrypt = "*"
 
 [dev-packages]
 pytest = "*"
