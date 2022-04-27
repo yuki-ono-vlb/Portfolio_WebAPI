@@ -4,9 +4,11 @@ from src.utils.router_include import router
 from src.utils.database import create_db_and_tables
 app = FastAPI()
 
+
 @app.on_event("startup")
 def on_seartup():
     create_db_and_tables()
+
 
 @app.get("/", status_code=status.HTTP_403_FORBIDDEN)
 async def index():
@@ -47,15 +49,11 @@ def _create_origins():
     ]
     origins = []
 
-    for domain,protocol,sub_domain,port in zip(domains,protocols,sub_domains,ports):
-        for protocol in protocols:
-            origins.append(f"{protocol}{domain}")
-            for sub_domain in sub_domains:
-                origins.append(f"{protocol}{sub_domain}.{domain}")
-                for port in ports:
-                    origins.append(f"{protocol}{domain}:{port}")
-                    origins.append(f"{protocol}{sub_domain}.{domain}:{port}")
-
+    for sub_domain, protocol in zip(sub_domains, protocols):
+        for domain in domains:
+            for port in ports:
+                origins.append(f"{protocol}{domain}:{port}")
+                origins.append(f"{protocol}{sub_domain}.{domain}:{port}")
     return origins
 
 
