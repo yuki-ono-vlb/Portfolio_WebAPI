@@ -4,6 +4,9 @@ from sqlmodel import Session
 from src.models.sns import Sns
 from src.utils.database import get_session
 from src.utils.authenticate import get_current_user
+from urllib.parse import urlparse
+import requests
+import bs4
 
 name = "sns"
 router = APIRouter()
@@ -11,7 +14,7 @@ prefix = f"/{name}"
 tags = [name]
 
 
-@router.get("", response_model=Sns)
+@router.get("", response_model=List[Sns])
 async def find_all(db: Session = Depends(get_session)):
     '''
     SNS情報を全て取得表示する
@@ -40,7 +43,9 @@ async def create(new_sns: Sns, db: Session = Depends(get_session), current_user:
     if db.query(Sns).filter(Sns.sns_name == new_sns.sns_name).first() is not None:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT, detail="該当と重複するデータが存在します。")
-
+    
+    parsed_uri = urlparse(new_sns.sns_url)
+    new_sns.sns_favicon = f"https://www.google.com/s2/favicons?domain={parsed_uri.netloc}"
     try:
         db.add(new_sns)
         db.commit()

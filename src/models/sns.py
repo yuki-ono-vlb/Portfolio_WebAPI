@@ -20,3 +20,8 @@ class Sns(SQLModel, table=True):
     SNS URL
     '''
     sns_url:str
+    
+    '''
+    favicon
+    '''
+    sns_favicon:str = None

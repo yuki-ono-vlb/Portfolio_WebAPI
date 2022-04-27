@@ -47,7 +47,7 @@ def _create_origins():
     ]
     origins = []
 
-    for domain in domains:
+    for domain,protocol,sub_domain,port in zip(domains,protocols,sub_domains,ports):
         for protocol in protocols:
             origins.append(f"{protocol}{domain}")
             for sub_domain in sub_domains:

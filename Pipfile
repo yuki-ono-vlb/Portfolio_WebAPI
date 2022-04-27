@@ -18,6 +18,8 @@ sqlmodel = "*"
 pyjwt = {extras = ["crypto"], version = "*"}
 passlib = "*"
 bcrypt = "*"
+requests = "*"
+bs4 = "*"
 
 [dev-packages]
 pytest = "*"

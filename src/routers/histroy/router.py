@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlmodel import Session
 from src.models.history import History
@@ -9,7 +10,7 @@ prefix = f"/{name}"
 tags = [name]
 
 
-@router.get("", response_model=History)
+@router.get("", response_model=List[History])
 async def find_all(db: Session = Depends(get_session)):
     '''
     経歴情報を全て取得表示する
